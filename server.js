@@ -3,6 +3,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const userdetails = require('./routes/userdetailsRoute')
 const schooldetails = require('./routes/schoolRoute')
+const courierdetails = require('./routes/courierRoute')
+const custdetails = require('./routes/customerRoute')
 
 var cors = require('cors')
 
@@ -17,13 +19,9 @@ app.use(express.urlencoded({extended: false}))
 
 app.use('/api/userdetails',userdetails);
 app.use('/api/school',schooldetails);
-app.get('/', (req, res) => {
-    res.send('Hello NODE API')
-})
+app.use('/api/courier',courierdetails);
+app.use('/api/customer',custdetails);
 
-app.get('/blog', (req, res) => {
-    res.send('Hello Blog, My name is Harish')
-})
 
 
 mongoose.set("strictQuery", false)
