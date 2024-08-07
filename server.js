@@ -5,6 +5,8 @@ const userdetails = require('./routes/userdetailsRoute')
 const schooldetails = require('./routes/schoolRoute')
 const courierdetails = require('./routes/courierRoute')
 const custdetails = require('./routes/customerRoute')
+const booking = require('./routes/bookingRoute')
+const autoawb = require('./routes/autoawbRoute')
 
 var cors = require('cors')
 
@@ -21,8 +23,8 @@ app.use('/api/userdetails',userdetails);
 app.use('/api/school',schooldetails);
 app.use('/api/courier',courierdetails);
 app.use('/api/customer',custdetails);
-
-
+app.use('/api/booking',booking);
+app.use('/api/autoawb',autoawb);
 
 mongoose.set("strictQuery", false)
 mongoose.
