@@ -62,13 +62,25 @@ const deleteUser = asyncHandler(async(req, res) =>{
         throw new Error(error.message);
     }
 })
+const getCoubyField = asyncHandler(async (req, res) => {
+    const { field, value } = req.query;
+    try {
+        const query = {};
+        query[field] = value;
 
+        const users = await UserDetails.find(query);
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 module.exports = {
     getUserDetails,
     createUser,
     getUserDetail,
     updateUser,
-    deleteUser
+    deleteUser,
+    getCoubyField
  
 }

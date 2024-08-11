@@ -62,11 +62,24 @@ const deleteBooking = asyncHandler(async(req, res) =>{
         throw new Error(error.message);
     }
 })
+const getCoubyField = asyncHandler(async (req, res) => {
+    const { field, value } = req.query;
+    try {
+        const query = {};
+        query[field] = value;
+
+        const users = await AutoAwb.find(query);
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 module.exports = {
     getBookingDetails,
     createBooking,
     getBookingDetail,
     updateBooking,
-    deleteBooking
+    deleteBooking,
+    getCoubyField
 }

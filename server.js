@@ -8,7 +8,8 @@ const custdetails = require('./routes/customerRoute')
 const booking = require('./routes/bookingRoute')
 const autoawb = require('./routes/autoawbRoute')
 const profile = require('./routes/profileRoute')
-
+const teacher = require('./routes/teacherRoute')
+const student = require('./routes/studentRoute')
 var cors = require('cors')
 
 const app = express();
@@ -27,7 +28,8 @@ app.use('/api/customer',custdetails);
 app.use('/api/booking',booking);
 app.use('/api/autoawb',autoawb);
 app.use('/api/profile',profile);
-
+app.use('/api/teacher',teacher);
+app.use('/api/student',student);
 mongoose.set("strictQuery", false)
 mongoose.
 connect(MONGO_URL)

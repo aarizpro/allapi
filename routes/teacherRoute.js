@@ -1,6 +1,6 @@
 const express = require('express')
-const SchoolDetails = require('../models/schoolModel')
-const{getSchoolDetails,createSchool,getSchoolDetail,updateSchool,deleteSchool,getCoubyField} = require('../controller/schoolController')
+const TeacherDetails = require('../models/teacherModel')
+const{getSchoolDetails,createSchool,getSchoolDetail,updateSchool,deleteSchool,getCoubyField} = require('../controller/teacherController')
 const router = express.Router();
 
 router.get('/',getSchoolDetails);
