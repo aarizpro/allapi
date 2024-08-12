@@ -64,9 +64,19 @@ const deleteBooking = asyncHandler(async(req, res) =>{
 })
 const getCoubyField = asyncHandler(async (req, res) => {
     const { field, value } = req.query;
+
     try {
         const query = {};
-        query[field] = value;
+        
+        // If `field` and `value` are arrays, process multiple conditions
+        if (Array.isArray(field) && Array.isArray(value) && field.length === value.length) {
+            field.forEach((f, index) => {
+                query[f] = value[index];
+            });
+        } else if (field && value) {
+            // If only a single condition is provided
+            query[field] = value;
+        }
 
         const users = await AutoAwb.find(query);
         res.json(users);
@@ -74,6 +84,7 @@ const getCoubyField = asyncHandler(async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 
 module.exports = {
     getBookingDetails,
