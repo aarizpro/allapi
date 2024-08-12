@@ -84,6 +84,37 @@ const getCoubyField = asyncHandler(async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+const updateByField = asyncHandler(async (req, res) => {
+    const { field, value, updateField, updateValue } = req.query;
+
+    try {
+        const query = {};
+
+        // Building the query based on the provided field and value
+        if (Array.isArray(field) && Array.isArray(value) && field.length === value.length) {
+            field.forEach((f, index) => {
+                query[f] = value[index];
+            });
+        } else if (field && value) {
+            query[field] = value;
+        }
+
+        // Define the update operation
+        const update = {};
+        update[updateField] = updateValue;
+
+        // Update the documents that match the query
+        const result = await AutoAwb.updateMany(query, update);
+
+        if (result.nModified > 0) {
+            res.json({ message: `${result.nModified} record(s) updated successfully` });
+        } else {
+            res.status(404).json({ message: 'No matching records found to update' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 
 module.exports = {
@@ -92,5 +123,6 @@ module.exports = {
     getBookingDetail,
     updateBooking,
     deleteBooking,
-    getCoubyField
+    getCoubyField,
+    updateByField
 }
