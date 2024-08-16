@@ -10,6 +10,8 @@ const autoawb = require('./routes/autoawbRoute')
 const profile = require('./routes/profileRoute')
 const teacher = require('./routes/teacherRoute')
 const student = require('./routes/studentRoute')
+const newschool = require('./routes/newschoolRoute')
+
 var cors = require('cors')
 
 const app = express();
@@ -30,6 +32,8 @@ app.use('/api/autoawb',autoawb);
 app.use('/api/profile',profile);
 app.use('/api/teacher',teacher);
 app.use('/api/student',student);
+app.use('/api/newschool',newschool);
+
 mongoose.set("strictQuery", false)
 mongoose.
 connect(MONGO_URL)
