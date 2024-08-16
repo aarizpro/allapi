@@ -32,6 +32,22 @@ const newschoolSchema = mongoose.Schema(
             type: String,
             required: [true,"Please Enter Address"]
         },
+        SchoolEmail: {
+            type: String,
+            required: [true,"Please Enter Email"]
+        },
+        OwnerName: {
+            type: String,
+            required: [true,"Please Owner Name"]
+        },
+        OwnerMob: {
+            type: String,
+            required: [true,"Please Owner Mob"]
+        },
+        SchoolLogo: {
+            type: String,
+            required: [true,"Please school Logo"]
+        },
     },
     {
         timestamps: true
