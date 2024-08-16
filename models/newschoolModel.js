@@ -8,8 +8,9 @@ const newschoolSchema = mongoose.Schema(
             default:0
         },
         NucleusID: {
-            type: String,
-            required: [true,"Please Enter School Name"]
+            type: Number,
+            required: true,
+            default:0
             
         },
         SchoolName: {
@@ -21,12 +22,14 @@ const newschoolSchema = mongoose.Schema(
             required: [true,"Please Enter Cycle"]
         },
         loc_lat: {
-            type: String,
-            required: [true,"Please Enter Address"]
+            type: Number,
+            required: true,
+            default:0
         },
         loc_long: {
-            type: String,
-            required: [true,"Please Enter Address"]
+            type: Number,
+            required: true,
+            default:0
         },
         Address: {
             type: String,
