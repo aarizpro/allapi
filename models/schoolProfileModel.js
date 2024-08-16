@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const newschoolSchema = mongoose.Schema(
+const profileschoolSchema = mongoose.Schema(
     {
         DealID: {
             type: Number,
@@ -58,6 +58,6 @@ const newschoolSchema = mongoose.Schema(
 )
 
 
-const NewSchool = mongoose.model('NewSchool', newschoolSchema);
+const ProfileSchool = mongoose.model('ProfileSchool', profileschoolSchema);
 
-module.exports = NewSchool;
+module.exports = ProfileSchool;
