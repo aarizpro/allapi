@@ -70,12 +70,13 @@ const getCoubyField = asyncHandler(async (req, res) => {
             return;
         }
 
-        console.log('Field:', field);
-        console.log('Value:', value);
-
         const query = {};
         field.forEach((f, index) => {
-            query[f] = new RegExp(value[index], 'i'); // Case-insensitive search
+            if (f === "DealID" || f === "NucleusID") { // Fields that should be numbers
+                query[f] = Number(value[index]); // Direct comparison for numbers
+            } else {
+                query[f] = new RegExp(value[index], 'i'); // Case-insensitive search for strings
+            }
         });
 
         console.log('Query:', query);
@@ -86,6 +87,7 @@ const getCoubyField = asyncHandler(async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 
 module.exports = {
     getSchoolDetails,
