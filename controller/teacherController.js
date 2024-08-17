@@ -69,16 +69,24 @@ const getCoubyField = asyncHandler(async (req, res) => {
             res.status(400).json({ error: "Fields and values must be arrays" });
             return;
         }
+
+        console.log('Field:', field);
+        console.log('Value:', value);
+
         const query = {};
         field.forEach((f, index) => {
-            query[f] = value[index];
+            query[f] = new RegExp(value[index], 'i'); // Case-insensitive search
         });
+
+        console.log('Query:', query);
+
         const users = await TeacherDetails.find(query);
         res.json(users);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
+
 module.exports = {
     getSchoolDetails,
     createSchool,
