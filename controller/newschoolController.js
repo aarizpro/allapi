@@ -65,9 +65,14 @@ const deleteSchool = asyncHandler(async(req, res) =>{
 const getCoubyField = asyncHandler(async (req, res) => {
     const { field, value } = req.query;
     try {
+        if (!Array.isArray(field) || !Array.isArray(value)) {
+            res.status(400).json({ error: "Fields and values must be arrays" });
+            return;
+        }
         const query = {};
-        query[field] = value;
-
+        field.forEach((f, index) => {
+            query[f] = value[index];
+        });
         const users = await NewSchool.find(query);
         res.json(users);
     } catch (err) {
