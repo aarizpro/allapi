@@ -32,6 +32,14 @@ const teacherSchema = mongoose.Schema(
         TeacherRole: {
             type: String,
             required: [true,"Please Enter AA Name"]
+        },
+        Grade: {
+            type: String,
+            required: [true,"Please Enter AA Name"]
+        },
+        Subject: {
+            type: String,
+            required: [true,"Please Enter AA Name"]
         }
     },
     {
