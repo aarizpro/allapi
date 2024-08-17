@@ -62,12 +62,36 @@ const deleteSchool = asyncHandler(async(req, res) =>{
         throw new Error(error.message);
     }
 })
+// const getCoubyField = asyncHandler(async (req, res) => {
+//     const { field, value } = req.query;
+//     try {
+//         const query = {};
+//         query[field] = value;
+
+//         const users = await SchoolDetails.find(query);
+//         res.json(users);
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// });
+
 const getCoubyField = asyncHandler(async (req, res) => {
     const { field, value } = req.query;
-    try {
-        const query = {};
-        query[field] = value;
 
+    try {
+        // Ensure both field and value are arrays
+        if (!Array.isArray(field) || !Array.isArray(value)) {
+            res.status(400).json({ error: "Fields and values must be arrays" });
+            return;
+        }
+
+        // Build query object dynamically
+        const query = {};
+        field.forEach((f, index) => {
+            query[f] = value[index];
+        });
+
+        // Fetch records that match the query
         const users = await SchoolDetails.find(query);
         res.json(users);
     } catch (err) {
