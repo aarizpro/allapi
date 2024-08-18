@@ -12,6 +12,7 @@ const teacher = require('./routes/teacherRoute')
 const student = require('./routes/studentRoute')
 const newschool = require('./routes/newschoolRoute')
 const profileschool = require('./routes/profileSchoolRoute')
+const asmfinder = require('./routes/asmRoute')
 var cors = require('cors')
 
 const app = express();
@@ -34,6 +35,7 @@ app.use('/api/teacher',teacher);
 app.use('/api/student',student);
 app.use('/api/newschool',newschool);
 app.use('/api/profileschool',profileschool);
+app.use('/api/asmfinder',asmfinder);
 mongoose.set("strictQuery", false)
 mongoose.
 connect(MONGO_URL)
