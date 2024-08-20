@@ -62,6 +62,35 @@ const deleteBooking = asyncHandler(async(req, res) =>{
         throw new Error(error.message);
     }
 })
+const uploadbyCSV = asyncHandler (async (req, res) => {
+    const csvData = req.body;
+  
+    try {
+      // Save each record from the CSV file into the database
+      await AutoAwb.insertMany(csvData);
+      res.status(200).send({ message: 'Data inserted successfully' });
+    } catch (error) {
+      res.status(500).send({ error: 'Error saving data' });
+    }
+  });
+  const saveAwb = asyncHandler (async (req, res) => {
+    const { airwayBill, courierName, awbStatus } = req.body;
+  
+    try {
+      // Check for duplicate Airway Bill
+      const existingAwb = await AutoAwb.findOne({ airwayBill });
+      if (existingAwb) {
+        return res.status(409).json({ message: "Airway Bill already exists" });
+      }
+  
+      const newAwb = new AutoAwb({ airwayBill, courierName, awbStatus });
+      await newAwb.save();
+  
+      res.status(201).json(newAwb);
+    } catch (error) {
+      res.status(500).json({ message: "Error saving Airway Bill", error });
+    }
+  });
 const getCoubyField = asyncHandler(async (req, res) => {
     const { field, value } = req.query;
 
@@ -124,5 +153,7 @@ module.exports = {
     updateBooking,
     deleteBooking,
     getCoubyField,
-    updateByField
+    updateByField,
+    uploadbyCSV,
+    saveAwb
 }

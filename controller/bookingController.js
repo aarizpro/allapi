@@ -2,8 +2,9 @@ const Booking = require('../models/bookingModel')
 const asyncHandler = require('express-async-handler')
 
 const getBookingDetails = asyncHandler(async(req, res) => {
+    const { sortBy = 'createdAt', sortOrder = 'asc' } = req.query;
     try {
-        const courierdetails = await Booking.find({});
+        const courierdetails = await Booking.find({}).sort({ [sortBy]: sortOrder === 'desc' ? 1 : -1 });;
         res.status(200).json(courierdetails);
     } catch (error) {
         res.status(500);
