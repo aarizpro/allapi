@@ -13,12 +13,14 @@ const student = require('./routes/studentRoute')
 const newschool = require('./routes/newschoolRoute')
 const profileschool = require('./routes/profileSchoolRoute')
 const asmfinder = require('./routes/asmRoute')
+const markEntry = require('./routes/markEntryRoute')
+
 var cors = require('cors')
 
 const app = express();
 
-const PORT = process.env.PORT || 3000
-const MONGO_URL = process.env.MONGO_URL
+const PORT = 80;
+const MONGO_URL = 'mongodb+srv://aarizpro2801:root123@cluster0.zsg212x.mongodb.net/?retryWrites=true&w=majority';
 
 app.use(cors())
 app.use(express.json())
@@ -36,6 +38,8 @@ app.use('/api/student',student);
 app.use('/api/newschool',newschool);
 app.use('/api/profileschool',profileschool);
 app.use('/api/asmfinder',asmfinder);
+app.use('/api/markentry',markEntry);
+
 mongoose.set("strictQuery", false)
 mongoose.
 connect(MONGO_URL)
