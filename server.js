@@ -19,12 +19,13 @@ var cors = require('cors')
 
 const app = express();
 
-const PORT = 80;
-const MONGO_URL = 'mongodb+srv://aarizpro2801:root123@cluster0.zsg212x.mongodb.net/?retryWrites=true&w=majority';
+const PORT = process.env.PORT
+const MONGO_URL = process.env.MONGO_URL
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
 
 app.use('/api/userdetails',userdetails);
 app.use('/api/school',schooldetails);
